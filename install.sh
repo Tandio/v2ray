@@ -172,8 +172,8 @@ v2ray_config() {
 		echo "备注1: 含有 [dynamicPort] 的即启用动态端口.."
 		echo "备注2: [utp | srtp | wechat-video | dtls | wireguard] 分别伪装成 [BT下载 | 视频通话 | 微信视频通话 | DTLS 1.2 数据包 | WireGuard 数据包]"
 		echo
-		read -p "$(echo -e "(默认协议: ${cyan}TCP$none)"):" v2ray_transport
-		[ -z "$v2ray_transport" ] && v2ray_transport=1
+		read -p "$(echo -e "(默认协议: ${cyan}mKCP_utp$none)"):" v2ray_transport
+		[ -z "$v2ray_transport" ] && v2ray_transport=7
 		case $v2ray_transport in
 		[1-9] | [1-2][0-9] | 3[0-2])
 			echo
@@ -549,8 +549,8 @@ shadowsocks_config() {
 
 	while :; do
 		echo -e "是否配置 ${yellow}Shadowsocks${none} [${magenta}Y/N$none]"
-		read -p "$(echo -e "(默认 [${cyan}N$none]):") " install_shadowsocks
-		[[ -z "$install_shadowsocks" ]] && install_shadowsocks="n"
+		read -p "$(echo -e "(默认 [${cyan}Y$none]):") " install_shadowsocks
+		[[ -z "$install_shadowsocks" ]] && install_shadowsocks="Y"
 		if [[ "$install_shadowsocks" == [Yy] ]]; then
 			echo
 			shadowsocks=true
@@ -568,10 +568,11 @@ shadowsocks_config() {
 
 shadowsocks_port_config() {
 	local random=$(shuf -i20001-65535 -n1)
+	local myport = 2333
 	while :; do
 		echo -e "请输入 "$yellow"Shadowsocks"$none" 端口 ["$magenta"1-65535"$none"]，不能和 "$yellow"V2Ray"$none" 端口相同"
-		read -p "$(echo -e "(默认端口: ${cyan}${random}$none):") " ssport
-		[ -z "$ssport" ] && ssport=$random
+		read -p "$(echo -e "(默认端口: ${cyan}${myport}$none):") " ssport
+		[ -z "$ssport" ] && ssport=$myport
 		case $ssport in
 		$v2ray_port)
 			echo
@@ -653,8 +654,8 @@ shadowsocks_ciphers_config() {
 			echo -e "$yellow $i. $none${ciphers_show}"
 		done
 		echo
-		read -p "$(echo -e "(默认加密协议: ${cyan}${ciphers[6]}$none)"):" ssciphers_opt
-		[ -z "$ssciphers_opt" ] && ssciphers_opt=7
+		read -p "$(echo -e "(默认加密协议: ${cyan}${ciphers[1]}$none)"):" ssciphers_opt
+		[ -z "$ssciphers_opt" ] && ssciphers_opt=2
 		case $ssciphers_opt in
 		[1-7])
 			ssciphers=${ciphers[$ssciphers_opt - 1]}
