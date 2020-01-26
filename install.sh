@@ -568,7 +568,7 @@ shadowsocks_config() {
 
 shadowsocks_port_config() {
 	local random=$(shuf -i20001-65535 -n1)
-	local myport = 2333
+	local myport=2333
 	while :; do
 		echo -e "请输入 "$yellow"Shadowsocks"$none" 端口 ["$magenta"1-65535"$none"]，不能和 "$yellow"V2Ray"$none" 端口相同"
 		read -p "$(echo -e "(默认端口: ${cyan}${myport}$none):") " ssport
