@@ -2144,7 +2144,7 @@ get_v2ray_config() {
 				echo "开始下载....请选择 V2Ray 客户端配置文件保存位置"
 				echo
 				# sz /etc/v2ray/233blog_v2ray.zip
-				local tmpfile="/tmp/233blog_v2ray_config_$RANDOM.json"
+				local tmpfile="/tmp/config.json"
 				cp -f $v2ray_client_config $tmpfile
 				sz $tmpfile
 				echo
@@ -2168,6 +2168,31 @@ get_v2ray_config() {
 	[[ -f $tmpfile ]] && rm -rf $tmpfile
 
 }
+
+get_v2ray_config_Xshell() {
+	config
+	echo
+	echo "开始下载....请选择 V2Ray 客户端配置文件保存位置"
+	echo
+	# sz /etc/v2ray/233blog_v2ray.zip
+	local tmpfile="/tmp/config.json"
+	cp -f $v2ray_client_config $tmpfile
+	sz $tmpfile
+	echo
+	echo
+	echo -e "$green 下载完成咯...$none"
+	echo
+	# echo -e "$yellow 解压密码 = ${cyan}233blog.com$none"
+	# echo
+	echo -e "$yellow SOCKS 监听端口 = ${cyan}2333${none}"
+	echo
+	echo -e "${yellow} HTTP 监听端口 = ${cyan}6666$none"
+	echo
+	echo "V2Ray 客户端使用教程: https://233v2.com/post/4/"
+	echo
+	[[ -f $tmpfile ]] && rm -rf $tmpfile
+}
+
 get_v2ray_config_link() {
 	_load client_file.sh
 	_get_client_file
@@ -2893,5 +2918,8 @@ bbr)
 	;;
 help | *)
 	_help
+	;;
+dx)
+	get_v2ray_config_Xshell
 	;;
 esac
