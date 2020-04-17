@@ -2687,6 +2687,8 @@ _help() {
 
 	${green}v2ray update $none更新 V2Ray
 
+	${green}v2ray dx $none直接下载 V2Ray 配置文件
+
 	${green}v2ray update.sh $none更新 V2Ray 管理脚本
 
 	${green}v2ray uninstall $none卸载 V2Ray
