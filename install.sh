@@ -17,6 +17,8 @@ _cyan() { echo -e ${cyan}$*${none}; }
 
 cmd="apt-get"
 
+isfastinstall = 0
+
 sys_bit=$(uname -m)
 
 case $sys_bit in
@@ -156,6 +158,10 @@ v2ray_config() {
 	# clear
 	echo
 	while :; do
+		if [$isfastinstall -eq 1] then
+			v2ray_transport = 7
+			break
+		fi
 		echo -e "请选择 "$yellow"V2Ray"$none" 传输协议 [${magenta}1-${#transport[*]}$none]"
 		echo
 		for ((i = 1; i <= ${#transport[*]}; i++)); do
@@ -1066,6 +1072,12 @@ uninstall() {
 
 }
 
+fastinstall() {
+	isfastinstall = 1
+	install
+	isfastinstall = 0
+}
+
 args=$1
 _gitbranch=$2
 [ -z $1 ] && args="online"
@@ -1103,6 +1115,8 @@ while :; do
 	echo " 1. 安装"
 	echo
 	echo " 2. 卸载"
+
+	echo " 3. 快速安装"
 	echo
 	if [[ $local_install ]]; then
 		echo -e "$yellow 温馨提示.. 本地安装已启用 ..$none"
@@ -1116,6 +1130,10 @@ while :; do
 		;;
 	2)
 		uninstall
+		break
+		;;
+	3)
+		fastinstall
 		break
 		;;
 	*)
