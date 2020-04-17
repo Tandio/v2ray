@@ -17,7 +17,7 @@ _cyan() { echo -e ${cyan}$*${none}; }
 
 cmd="apt-get"
 
-isfastinstall = 0
+isfastinstall=0
 
 sys_bit=$(uname -m)
 
@@ -158,7 +158,7 @@ v2ray_config() {
 	# clear
 	echo
 	while :; do
-		if [$isfastinstall -eq 1] then
+		if [$isfastinstall -eq 1]; then
 			v2ray_transport = 7
 			break
 		fi
@@ -1115,7 +1115,7 @@ while :; do
 	echo " 1. 安装"
 	echo
 	echo " 2. 卸载"
-
+	echo
 	echo " 3. 快速安装"
 	echo
 	if [[ $local_install ]]; then
