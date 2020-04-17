@@ -1073,9 +1073,9 @@ uninstall() {
 }
 
 fastinstall() {
-	isfastinstall = 1
+	isfastinstall=1
 	install
-	isfastinstall = 0
+	isfastinstall=0
 }
 
 args=$1
