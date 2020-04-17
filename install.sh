@@ -204,6 +204,10 @@ v2ray_port_config() {
 	*)
 		local random=$(shuf -i20001-65535 -n1)
 		while :; do
+			if [[ $isfastinstall -eq 1 ]]; then
+				v2ray_port=$random
+				break
+			fi
 			echo -e "请输入 "$yellow"V2Ray"$none" 端口 ["$magenta"1-65535"$none"]"
 			read -p "$(echo -e "(默认端口: ${cyan}${random}$none):")" v2ray_port
 			[ -z "$v2ray_port" ] && v2ray_port=$random
@@ -519,6 +523,10 @@ proxy_site_config() {
 blocked_hosts() {
 	echo
 	while :; do
+		if [[ $isfastinstall -eq 1 ]]; then
+			blocked_ad_info="关闭"
+			break
+		fi
 		echo -e "是否开启广告拦截(会影响性能) [${magenta}Y/N$none]"
 		read -p "$(echo -e "(默认 [${cyan}N$none]):")" blocked_ad
 		[[ -z $blocked_ad ]] && blocked_ad="n"
@@ -554,6 +562,11 @@ shadowsocks_config() {
 	echo
 
 	while :; do
+		if [[ $isfastinstall -eq 1 ]]; then
+			shadowsocks=true
+			shadowsocks_port_config
+			break
+		fi
 		echo -e "是否配置 ${yellow}Shadowsocks${none} [${magenta}Y/N$none]"
 		read -p "$(echo -e "(默认 [${cyan}Y$none]):") " install_shadowsocks
 		[[ -z "$install_shadowsocks" ]] && install_shadowsocks="Y"
@@ -576,6 +589,10 @@ shadowsocks_port_config() {
 	local random=$(shuf -i20001-65535 -n1)
 	local myport=2333
 	while :; do
+		if [[ $isfastinstall -eq 1 ]]; then
+			ssport=$myport
+			break
+		fi
 		echo -e "请输入 "$yellow"Shadowsocks"$none" 端口 ["$magenta"1-65535"$none"]，不能和 "$yellow"V2Ray"$none" 端口相同"
 		read -p "$(echo -e "(默认端口: ${cyan}${myport}$none):") " ssport
 		[ -z "$ssport" ] && ssport=$myport
@@ -626,6 +643,10 @@ shadowsocks_port_config() {
 shadowsocks_password_config() {
 
 	while :; do
+		if [[ $isfastinstall -eq 1 ]]; then
+			sspass="233blog.com"
+			break
+		fi
 		echo -e "请输入 "$yellow"Shadowsocks"$none" 密码"
 		read -p "$(echo -e "(默认密码: ${cyan}233blog.com$none)"): " sspass
 		[ -z "$sspass" ] && sspass="233blog.com"
@@ -653,6 +674,10 @@ shadowsocks_password_config() {
 shadowsocks_ciphers_config() {
 
 	while :; do
+		if [[ $isfastinstall -eq 1 ]]; then
+			ssciphers=${ciphers[1]}
+			break
+		fi
 		echo -e "请选择 "$yellow"Shadowsocks"$none" 加密协议 [${magenta}1-${#ciphers[*]}$none]"
 		for ((i = 1; i <= ${#ciphers[*]}; i++)); do
 			ciphers_show="${ciphers[$i - 1]}"
