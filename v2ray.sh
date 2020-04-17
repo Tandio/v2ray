@@ -2894,6 +2894,9 @@ reinstall)
 		bash <(curl -s -L https://git.io/v2ray.sh)
 	fi
 	;;
+dx)
+	get_v2ray_config_Xshell
+	;;
 [aA][Ii] | [Dd])
 	change_v2ray_alterId
 	;;
@@ -2918,8 +2921,5 @@ bbr)
 	;;
 help | *)
 	_help
-	;;
-dx)
-	get_v2ray_config_Xshell
 	;;
 esac
