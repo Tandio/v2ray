@@ -158,8 +158,8 @@ v2ray_config() {
 	# clear
 	echo
 	while :; do
-		if [$isfastinstall -eq 1]; then
-			v2ray_transport = 7
+		if [ $isfastinstall -eq 1 ]; then
+			v2ray_transport=7
 			break
 		fi
 		echo -e "请选择 "$yellow"V2Ray"$none" 传输协议 [${magenta}1-${#transport[*]}$none]"
