@@ -158,7 +158,7 @@ v2ray_config() {
 	# clear
 	echo
 	while :; do
-		if [ $isfastinstall -eq 1 ]; then
+		if [[ $isfastinstall -eq 1 ]]; then
 			v2ray_transport=7
 			break
 		fi
